@@ -43,11 +43,13 @@ function SeedAvatar({ size = 56, mood = 'default' }) {
         </>
       ) : (
         <>
-          {/* 기본/행복/화남/그럭저럭: 검정+노랑 눈 */}
-          <circle cx="44" cy="63" r="9" fill={EYE_YELLOW} />
-          <circle cx="44" cy="59" r="8" fill={EYE_DARK} />
-          <circle cx="76" cy="63" r="9" fill={EYE_YELLOW} />
-          <circle cx="76" cy="59" r="8" fill={EYE_DARK} />
+          {/* 기본/행복/화남/그럭저럭: 검정+노랑 눈 (가운데 정렬 + 하이라이트) */}
+          <circle cx="44" cy="61" r="9" fill={EYE_YELLOW} />
+          <circle cx="44" cy="61" r="5.5" fill={EYE_DARK} />
+          <circle cx="42" cy="59" r="1.8" fill="#FFFFFF" />
+          <circle cx="76" cy="61" r="9" fill={EYE_YELLOW} />
+          <circle cx="76" cy="61" r="5.5" fill={EYE_DARK} />
+          <circle cx="74" cy="59" r="1.8" fill="#FFFFFF" />
         </>
       )}
 

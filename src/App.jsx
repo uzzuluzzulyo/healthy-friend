@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/common/navbar.jsx';
 import RequireAuth from './components/common/require-auth.jsx';
 import Home from './pages/home.jsx';
+import HealthHub from './pages/health-hub.jsx';
 import HealthLog from './pages/health-log.jsx';
 import MoodLog from './pages/mood-log.jsx';
 import SeedChat from './pages/seed-chat.jsx';
@@ -21,6 +22,7 @@ function App() {
         <Route path="/find-id" element={<FindId />} />
         <Route path="/find-password" element={<FindPassword />} />
         <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
+        <Route path="/health-hub" element={<RequireAuth><HealthHub /></RequireAuth>} />
         <Route path="/health" element={<RequireAuth><HealthLog /></RequireAuth>} />
         <Route path="/mood" element={<RequireAuth><MoodLog /></RequireAuth>} />
         <Route path="/chat" element={<RequireAuth><SeedChat /></RequireAuth>} />

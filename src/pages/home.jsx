@@ -8,6 +8,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import MusicNoteRoundedIcon from '@mui/icons-material/MusicNoteRounded';
+import { useNavigate } from 'react-router-dom';
 import SeedAvatar from '../components/ui/seed-avatar.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
@@ -17,6 +18,7 @@ const STEP_GOAL = 10000;
 const WATER_GOAL_ML = 1500;
 
 function Home() {
+  const navigate = useNavigate();
   const { user } = useCurrentUser();
   const [todayLog, setTodayLog] = useState(null);
 
@@ -88,7 +90,7 @@ function Home() {
           </CardContent>
         </Card>
 
-        <Card sx={{ borderRadius: 3, mb: 2 }}>
+        <Card sx={{ borderRadius: 3, mb: 2, cursor: 'pointer' }} onClick={() => navigate('/health-hub')}>
           <CardContent>
             <Typography sx={{ color: 'text.primary', fontWeight: 700, mb: 2 }}>
               나만의 건강 LOG
