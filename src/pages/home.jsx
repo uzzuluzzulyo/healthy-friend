@@ -162,17 +162,6 @@ function Home() {
             </Box>
           </CardContent>
         </Card>
-
-        <Card sx={{ borderRadius: 3, bgcolor: 'primary.light' }}>
-          <CardContent>
-            <Typography sx={{ color: 'primary.contrastText', fontWeight: 700, mb: 0.5 }}>
-              오늘 기분은 어떠셨나요?
-            </Typography>
-            <Typography sx={{ color: 'primary.contrastText', fontSize: '0.85rem' }}>
-              하단의 '심리기록' 탭에서 오늘의 기분을 남겨보세요.
-            </Typography>
-          </CardContent>
-        </Card>
       </Container>
     </Box>
   );

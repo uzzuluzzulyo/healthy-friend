@@ -12,6 +12,7 @@ import Login from './pages/login.jsx';
 import Signup from './pages/signup.jsx';
 import FindId from './pages/find-id.jsx';
 import FindPassword from './pages/find-password.jsx';
+import Search from './pages/search.jsx';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/chat" element={<RequireAuth><SeedChat /></RequireAuth>} />
         <Route path="/my" element={<RequireAuth><MyPage /></RequireAuth>} />
         <Route path="/care" element={<RequireAuth><CareRoom /></RequireAuth>} />
+        <Route path="/search" element={<RequireAuth><Search /></RequireAuth>} />
       </Routes>
       <Navbar />
     </>
