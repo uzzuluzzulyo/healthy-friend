@@ -6,6 +6,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import LinearProgress from '@mui/material/LinearProgress';
 import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
+import MusicNoteRoundedIcon from '@mui/icons-material/MusicNoteRounded';
 import SeedAvatar from '../components/ui/seed-avatar.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
@@ -54,8 +56,42 @@ function Home() {
 
         <Card sx={{ borderRadius: 3, mb: 2 }}>
           <CardContent>
+            <Typography sx={{ color: 'text.primary', fontWeight: 700, mb: 0.5 }}>
+              {user?.nickname ?? '헬시'}님, 오늘의 노래 추천이에요!
+            </Typography>
+            <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem', mb: 2 }}>
+              신나는 노래로 기분 전환은 어떠신가요?
+            </Typography>
+            <Grid container spacing={1.5}>
+              {[
+                { tag: '#신나는' },
+                { tag: '#즐겨 듣는 노래' },
+              ].map((item) => (
+                <Grid key={item.tag} size={6}>
+                  <Box
+                    sx={{
+                      borderRadius: 2,
+                      bgcolor: 'primary.light',
+                      aspectRatio: '1.6',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      mb: 0.5,
+                    }}
+                  >
+                    <MusicNoteRoundedIcon sx={{ color: 'primary.contrastText', fontSize: 28 }} />
+                  </Box>
+                  <Typography sx={{ color: 'text.secondary', fontSize: '0.8rem' }}>{item.tag}</Typography>
+                </Grid>
+              ))}
+            </Grid>
+          </CardContent>
+        </Card>
+
+        <Card sx={{ borderRadius: 3, mb: 2 }}>
+          <CardContent>
             <Typography sx={{ color: 'text.primary', fontWeight: 700, mb: 2 }}>
-              오늘의 건강 LOG
+              나만의 건강 LOG
             </Typography>
 
             <Box sx={{ mb: 2 }}>

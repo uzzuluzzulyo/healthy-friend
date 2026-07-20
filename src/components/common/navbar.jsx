@@ -16,7 +16,7 @@ const navItems = [
   { label: '마이', path: '/my', icon: <PersonRoundedIcon /> },
 ];
 
-const hiddenPaths = ['/login', '/signup', '/find-id', '/find-password'];
+const hiddenPaths = ['/login', '/signup', '/find-id', '/find-password', '/care'];
 
 function Navbar() {
   const location = useLocation();

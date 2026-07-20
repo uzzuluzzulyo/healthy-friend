@@ -7,7 +7,18 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import PsychologyRoundedIcon from '@mui/icons-material/PsychologyRounded';
+import SpaRoundedIcon from '@mui/icons-material/SpaRounded';
+import PsychologyAltRoundedIcon from '@mui/icons-material/PsychologyAltRounded';
+import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
+import LockRoundedIcon from '@mui/icons-material/LockRounded';
+import { useNavigate } from 'react-router-dom';
 import SeedAvatar from '../components/ui/seed-avatar.jsx';
+import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
 import { getCurrentUserId } from '../lib/auth.js';
 
@@ -18,7 +29,22 @@ const moods = [
   { label: '화남', mood: 'angry' },
 ];
 
+const testCards = [
+  { title: '운명의 새싹테스트', subtitle: '나는 어떤 새싹으로 자랄까?' },
+  { title: '낭플갱어 테스트', subtitle: '나와 닮은 고양이는? (인기 퀴즈)' },
+];
+
+const iconRow = [
+  { label: 'MBTI', icon: <PsychologyAltRoundedIcon /> },
+  { label: '친구', icon: <GroupRoundedIcon /> },
+  { label: '마음', icon: <FavoriteRoundedIcon /> },
+  { label: '퀴즈', icon: <QuizRoundedIcon /> },
+  { label: '비밀', icon: <LockRoundedIcon /> },
+];
+
 function MoodLog() {
+  const navigate = useNavigate();
+  const { user } = useCurrentUser();
   const [selectedMood, setSelectedMood] = useState('');
   const [note, setNote] = useState('');
   const [entries, setEntries] = useState([]);
@@ -66,6 +92,68 @@ function MoodLog() {
         <Typography variant="h5" sx={{ color: 'text.primary', fontWeight: 700, mb: 3 }}>
           나의 심리 기록
         </Typography>
+
+        <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem', mb: 2 }}>
+          오늘 {user?.nickname ?? '헬시'}님은 많이 지쳐군요.. 다양한 심리테스트를 통해 지친 하루를 달래보아요!
+        </Typography>
+
+        <Grid container spacing={1.5} sx={{ mb: 2 }}>
+          <Grid size={6}>
+            <Card sx={{ borderRadius: 3, height: '100%' }}>
+              <CardContent sx={{ textAlign: 'center', py: 3 }}>
+                <PsychologyRoundedIcon sx={{ color: 'primary.main', fontSize: 32, mb: 1 }} />
+                <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: '0.85rem' }}>
+                  전문가와 상담하기
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid size={6}>
+            <Card sx={{ borderRadius: 3, height: '100%', cursor: 'pointer' }} onClick={() => navigate('/care')}>
+              <CardContent sx={{ textAlign: 'center', py: 3 }}>
+                <SpaRoundedIcon sx={{ color: 'primary.main', fontSize: 32, mb: 1 }} />
+                <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: '0.85rem' }}>
+                  나만의 심리 케어실
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1.5} sx={{ mb: 2 }}>
+          {testCards.map((test) => (
+            <Grid key={test.title} size={6}>
+              <Card sx={{ borderRadius: 3, height: '100%' }}>
+                <CardContent>
+                  <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: '0.85rem', mb: 0.5 }}>
+                    {test.title}
+                  </Typography>
+                  <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', mb: 1.5 }}>
+                    {test.subtitle}
+                  </Typography>
+                  <Button
+                    size="small"
+                    disabled
+                    fullWidth
+                    variant="outlined"
+                    sx={{ color: 'text.disabled', borderColor: 'divider' }}
+                  >
+                    준비 중
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+
+        <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 3 }}>
+          {iconRow.map((item) => (
+            <Box key={item.label} sx={{ textAlign: 'center' }}>
+              <IconButton sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>{item.icon}</IconButton>
+              <Typography sx={{ color: 'text.secondary', fontSize: '0.7rem', mt: 0.3 }}>{item.label}</Typography>
+            </Box>
+          ))}
+        </Stack>
 
         <Card sx={{ borderRadius: 3, mb: 3 }}>
           <CardContent>

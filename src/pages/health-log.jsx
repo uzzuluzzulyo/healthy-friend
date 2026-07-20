@@ -8,10 +8,24 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
+import Chip from '@mui/material/Chip';
+import RestaurantRoundedIcon from '@mui/icons-material/RestaurantRounded';
+import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
 import { getCurrentUserId } from '../lib/auth.js';
 
+const HABIT_TAGS = ['충분한 휴식', '물 마시기', '스트레스 완화'];
+const LEVELS = ['위험', '보통', '양호'];
+
+function getLevel(latest) {
+  if (!latest) return '보통';
+  if (latest.steps < 3000 || latest.water_ml < 500) return '위험';
+  if (latest.steps >= 8000 && latest.water_ml >= 1200) return '양호';
+  return '보통';
+}
+
 function HealthLog() {
+  const { user } = useCurrentUser();
   const [steps, setSteps] = useState('');
   const [waterMl, setWaterMl] = useState('');
   const [sleepHours, setSleepHours] = useState('');
@@ -63,6 +77,62 @@ function HealthLog() {
         <Typography variant="h5" sx={{ color: 'text.primary', fontWeight: 700, mb: 3 }}>
           나의 건강 기록
         </Typography>
+
+        <Card sx={{ borderRadius: 3, mb: 2 }}>
+          <CardContent>
+            <Typography sx={{ color: 'text.primary', fontSize: '0.95rem', mb: 1.5 }}>
+              {user?.nickname ?? '헬시'}님의 생활습관 지수는{' '}
+              <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                {getLevel(logs[0])}
+              </Box>
+              에 해당합니다.
+            </Typography>
+            <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
+              {LEVELS.map((level) => (
+                <Chip
+                  key={level}
+                  label={level}
+                  sx={{
+                    bgcolor: level === getLevel(logs[0]) ? 'primary.main' : 'background.default',
+                    color: level === getLevel(logs[0]) ? 'primary.contrastText' : 'text.secondary',
+                    fontWeight: 700,
+                  }}
+                />
+              ))}
+            </Stack>
+
+            <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: '0.9rem', mb: 1 }}>
+              {user?.nickname ?? '헬시'}님에게 필요한 습관
+            </Typography>
+            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+              {HABIT_TAGS.map((tag) => (
+                <Chip key={tag} label={tag} variant="outlined" sx={{ borderColor: 'divider', color: 'text.secondary' }} />
+              ))}
+            </Stack>
+          </CardContent>
+        </Card>
+
+        <Card sx={{ borderRadius: 3, mb: 2 }}>
+          <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box
+              sx={{
+                width: 56,
+                height: 56,
+                borderRadius: 2,
+                bgcolor: 'primary.light',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <RestaurantRoundedIcon sx={{ color: 'primary.contrastText' }} />
+            </Box>
+            <Typography sx={{ color: 'text.primary', fontSize: '0.9rem' }}>
+              {user?.nickname ?? '헬시'}님! 오늘의 저녁 메뉴로 스테이크 샐러드는 어때요?
+            </Typography>
+          </CardContent>
+        </Card>
 
         <Card sx={{ borderRadius: 3, mb: 3 }}>
           <CardContent>

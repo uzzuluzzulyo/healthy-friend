@@ -6,6 +6,7 @@ import HealthLog from './pages/health-log.jsx';
 import MoodLog from './pages/mood-log.jsx';
 import SeedChat from './pages/seed-chat.jsx';
 import MyPage from './pages/my-page.jsx';
+import CareRoom from './pages/care-room.jsx';
 import Login from './pages/login.jsx';
 import Signup from './pages/signup.jsx';
 import FindId from './pages/find-id.jsx';
@@ -24,6 +25,7 @@ function App() {
         <Route path="/mood" element={<RequireAuth><MoodLog /></RequireAuth>} />
         <Route path="/chat" element={<RequireAuth><SeedChat /></RequireAuth>} />
         <Route path="/my" element={<RequireAuth><MyPage /></RequireAuth>} />
+        <Route path="/care" element={<RequireAuth><CareRoom /></RequireAuth>} />
       </Routes>
       <Navbar />
     </>

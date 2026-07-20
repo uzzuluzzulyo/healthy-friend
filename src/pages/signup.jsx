@@ -116,7 +116,7 @@ function Signup() {
                 type="date"
                 value={birthDate}
                 onChange={(event) => setBirthDate(event.target.value)}
-                InputLabelProps={{ shrink: true }}
+                slotProps={{ inputLabel: { shrink: true } }}
                 sx={inputSx}
               />
               <TextField label="비밀번호" type="password" value={password} onChange={(event) => setPassword(event.target.value)} sx={inputSx} />
