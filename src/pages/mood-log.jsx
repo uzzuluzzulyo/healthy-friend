@@ -92,7 +92,7 @@ function MoodLog() {
         <PageHeader title="나의 심리 기록" backTo="/health-hub" />
 
         <Stack direction="row" spacing={1.5} alignItems="flex-start" sx={{ mb: 2 }}>
-          <SeedAvatar size={40} mood="sad" />
+          <SeedAvatar size={52} mood="sad" />
           <Box
             sx={{
               bgcolor: 'background.paper',
@@ -175,15 +175,25 @@ function MoodLog() {
           ))}
         </Grid>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', mb: 3 }}>
-          <Box sx={{ display: 'flex', gap: { xs: 2, sm: 3 } }}>
-            {iconRow.map((item) => (
-              <Box key={item.label} sx={{ textAlign: 'center' }}>
-                <IconButton sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>{item.icon}</IconButton>
-                <Typography sx={{ color: 'text.secondary', fontSize: '0.7rem', mt: 0.3 }}>{item.label}</Typography>
-              </Box>
-            ))}
-          </Box>
+        <Box sx={{ display: 'block', width: '100%', textAlign: 'center', mb: 3 }}>
+          {iconRow.map((item) => (
+            <Box key={item.label} sx={{ display: 'inline-block', mx: { xs: 1.75, sm: 2.5 }, verticalAlign: 'top' }}>
+              <IconButton
+                sx={{
+                  bgcolor: 'background.default',
+                  color: 'text.secondary',
+                  width: 52,
+                  height: 52,
+                  '& svg': { fontSize: 26 },
+                }}
+              >
+                {item.icon}
+              </IconButton>
+              <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', mt: 0.5, fontWeight: 500 }}>
+                {item.label}
+              </Typography>
+            </Box>
+          ))}
         </Box>
 
         <Card sx={{ borderRadius: 3, mb: 3 }}>
@@ -204,7 +214,7 @@ function MoodLog() {
                       transition: 'all 0.2s ease',
                     }}
                   >
-                    <SeedAvatar size={64} mood={item.mood} />
+                    <SeedAvatar size={80} mood={item.mood} />
                     <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', mt: 0.5 }}>{item.label}</Typography>
                   </Box>
                 </Grid>

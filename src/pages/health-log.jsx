@@ -77,8 +77,8 @@ function HealthLog() {
       <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
         <PageHeader title="나의 건강 기록" backTo="/health-hub" />
 
-        <Card sx={{ borderRadius: 3, mb: 2 }}>
-          <CardContent>
+        <Card sx={{ borderRadius: 3, mb: 3 }}>
+          <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
             <Typography sx={{ color: 'text.primary', fontSize: '0.95rem', mb: 1.5 }}>
               {user?.nickname ?? '헬시'}님의 생활습관 지수는{' '}
               <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
@@ -111,13 +111,13 @@ function HealthLog() {
           </CardContent>
         </Card>
 
-        <Card sx={{ borderRadius: 3, mb: 2 }}>
-          <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Card sx={{ borderRadius: 3, mb: 3 }}>
+          <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2.5, p: { xs: 2.5, md: 3.5 } }}>
             <Box
               sx={{
-                width: 56,
-                height: 56,
-                borderRadius: 2,
+                width: 68,
+                height: 68,
+                borderRadius: 2.5,
                 bgcolor: 'primary.light',
                 display: 'flex',
                 alignItems: 'center',
@@ -125,7 +125,7 @@ function HealthLog() {
                 flexShrink: 0,
               }}
             >
-              <RestaurantRoundedIcon sx={{ color: 'primary.contrastText' }} />
+              <RestaurantRoundedIcon sx={{ color: 'primary.contrastText', fontSize: 32 }} />
             </Box>
             <Typography sx={{ color: 'text.primary', fontSize: '0.9rem' }}>
               {user?.nickname ?? '헬시'}님! 오늘의 저녁 메뉴로 스테이크 샐러드는 어때요?
@@ -134,7 +134,7 @@ function HealthLog() {
         </Card>
 
         <Card sx={{ borderRadius: 3, mb: 3 }}>
-          <CardContent>
+          <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
             <Box component="form" onSubmit={handleSubmit}>
               <Stack spacing={2}>
                 <TextField label="걸음 수" type="number" value={steps} onChange={(event) => setSteps(event.target.value)} size="small" />

@@ -64,6 +64,9 @@ function Navbar() {
             '& .Mui-selected': {
               color: 'primary.main',
             },
+            '& .MuiBottomNavigationAction-root svg': {
+              fontSize: 26,
+            },
           }}
         >
           {navItems.map((item) => {
@@ -90,14 +93,15 @@ function Navbar() {
                   icon={
                     <Box
                       sx={{
-                        width: 32,
-                        height: 32,
+                        width: 42,
+                        height: 42,
                         borderRadius: '50%',
                         bgcolor: 'primary.light',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         color: 'primary.contrastText',
+                        '& svg': { fontSize: 24 },
                       }}
                     >
                       {item.icon}

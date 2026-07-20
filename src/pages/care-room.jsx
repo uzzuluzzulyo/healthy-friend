@@ -33,7 +33,7 @@ function CareRoom() {
       </IconButton>
 
       <Box sx={{ position: 'absolute', bottom: 140, right: 24 }}>
-        <SeedAvatar size={64} mood="default" />
+        <SeedAvatar size={96} mood="default" />
       </Box>
 
       <Box sx={{ position: 'absolute', bottom: 48, left: 24, right: 24 }}>

@@ -27,9 +27,9 @@ function MyPage() {
         </Typography>
 
         <Card sx={{ borderRadius: 3, mb: 3 }}>
-          <CardContent>
-            <Stack direction="row" spacing={2} alignItems="center">
-              <SeedAvatar size={76} mood="default" />
+          <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
+            <Stack direction="row" spacing={2.5} alignItems="center">
+              <SeedAvatar size={96} mood="default" />
               <Box>
                 <Typography sx={{ color: 'text.primary', fontWeight: 700 }}>
                   {loading ? '불러오는 중...' : (user?.nickname ?? '알 수 없음')}

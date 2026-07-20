@@ -63,7 +63,7 @@ function Login() {
         <Card sx={{ borderRadius: 3 }}>
           <CardContent sx={{ p: { xs: 3, md: 5 }, textAlign: 'center' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-              <SeedAvatar size={88} mood="default" />
+              <SeedAvatar size={104} mood="default" />
             </Box>
             <Typography variant="h4" sx={{ color: 'text.primary', fontWeight: 700, mb: 3, fontSize: { xs: '1.75rem', md: '2.25rem' } }}>
               로그인

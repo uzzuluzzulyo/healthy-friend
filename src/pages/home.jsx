@@ -59,7 +59,7 @@ function Home() {
       <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
         <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
           <Box onClick={() => navigate('/chat')} sx={{ cursor: 'pointer' }}>
-            <SeedAvatar size={88} mood="happy" />
+            <SeedAvatar size={112} mood="happy" />
           </Box>
           <Box>
             <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: { xs: '1.2rem', md: '1.4rem' } }}>
@@ -71,15 +71,15 @@ function Home() {
           </Box>
         </Stack>
 
-        <Card sx={{ borderRadius: 3, mb: 2 }}>
-          <CardContent>
-            <Typography sx={{ color: 'text.primary', fontWeight: 700, mb: 0.5 }}>
+        <Card sx={{ borderRadius: 3, mb: 3 }}>
+          <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
+            <Typography sx={{ color: 'text.primary', fontWeight: 700, mb: 0.75 }}>
               {user?.nickname ?? '헬시'}님, 오늘의 노래 추천이에요!
             </Typography>
-            <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem', mb: 2 }}>
+            <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem', mb: 2.5 }}>
               신나는 노래로 기분 전환은 어떠신가요?
             </Typography>
-            <Grid container spacing={1.5}>
+            <Grid container spacing={2.5}>
               {SONGS.map((song) => (
                 <Grid key={song.tag} size={6}>
                   <Box
@@ -95,7 +95,7 @@ function Home() {
                         borderRadius: 2,
                         overflow: 'hidden',
                         aspectRatio: '1.6',
-                        mb: 0.5,
+                        mb: 1,
                         backgroundImage: `url(https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg)`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
@@ -115,7 +115,7 @@ function Home() {
                         <PlayArrowRoundedIcon sx={{ color: '#FFFFFF', fontSize: 32 }} />
                       </Box>
                     </Box>
-                    <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem' }}>{song.tag}</Typography>
+                    <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', mb: 0.25 }}>{song.tag}</Typography>
                     <Typography sx={{ color: 'text.primary', fontSize: '0.8rem', fontWeight: 600 }}>
                       {song.title}
                     </Typography>
@@ -126,14 +126,14 @@ function Home() {
           </CardContent>
         </Card>
 
-        <Card sx={{ borderRadius: 3, mb: 2, cursor: 'pointer' }} onClick={() => navigate('/health-hub')}>
-          <CardContent>
-            <Typography sx={{ color: 'text.primary', fontWeight: 700, mb: 2 }}>
+        <Card sx={{ borderRadius: 3, mb: 3, cursor: 'pointer' }} onClick={() => navigate('/health-hub')}>
+          <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
+            <Typography sx={{ color: 'text.primary', fontWeight: 700, mb: 2.5 }}>
               나만의 건강 LOG
             </Typography>
 
-            <Box sx={{ mb: 2 }}>
-              <Stack direction="row" justifyContent="space-between" sx={{ mb: 0.5 }}>
+            <Box sx={{ mb: 2.5 }}>
+              <Stack direction="row" justifyContent="space-between" sx={{ mb: 1 }}>
                 <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem' }}>걸음 수</Typography>
                 <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem' }}>
                   {steps.toLocaleString()} / {STEP_GOAL.toLocaleString()}
@@ -147,7 +147,7 @@ function Home() {
             </Box>
 
             <Box>
-              <Stack direction="row" justifyContent="space-between" sx={{ mb: 0.5 }}>
+              <Stack direction="row" justifyContent="space-between" sx={{ mb: 1 }}>
                 <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem' }}>물 섭취량</Typography>
                 <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem' }}>
                   {waterMl}ml / {WATER_GOAL_ML}ml
