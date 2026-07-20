@@ -56,9 +56,9 @@ function Home() {
 
   return (
     <Box sx={{ width: '100%', pb: 10 }}>
-      <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
+      <Container maxWidth="sm" sx={{ pt: { xs: 5, md: 8 }, pb: { xs: 3, md: 6 } }}>
         <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
-          <Box onClick={() => navigate('/chat')} sx={{ cursor: 'pointer' }}>
+          <Box onClick={() => navigate('/chat')} sx={{ cursor: 'pointer', flexShrink: 0 }}>
             <SeedAvatar size={112} mood="happy" />
           </Box>
           <Box>
