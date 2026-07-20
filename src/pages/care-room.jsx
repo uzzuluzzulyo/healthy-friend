@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import SeedAvatar from '../components/ui/seed-avatar.jsx';
+import oceanBg from '../assets/ocean-bg.jpg';
 
 function CareRoom() {
   const navigate = useNavigate();
@@ -18,7 +19,9 @@ function CareRoom() {
         width: '100%',
         minHeight: '100vh',
         pb: 10,
-        background: 'linear-gradient(160deg, #4A8FA6 0%, #2E6B7E 60%, #1F4E5C 100%)',
+        backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%), url(${oceanBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         overflow: 'hidden',
       }}
     >
