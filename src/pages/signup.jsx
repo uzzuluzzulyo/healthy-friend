@@ -103,7 +103,7 @@ function Signup() {
         <Card sx={{ borderRadius: 3 }}>
           <CardContent sx={{ p: { xs: 3, md: 5 }, textAlign: 'center' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-              <SeedAvatar size={64} mood="happy" />
+              <SeedAvatar size={88} mood="happy" />
             </Box>
             <Typography variant="h4" sx={{ color: 'text.primary', fontWeight: 700, mb: 3, fontSize: { xs: '1.6rem', md: '2rem' } }}>
               헬시프렌드 회원가입

@@ -69,7 +69,7 @@ function SeedChat() {
     <Box sx={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', pb: 10 }}>
       <Container maxWidth="sm" sx={{ pt: { xs: 2, md: 4 }, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2 }}>
-          <SeedAvatar size={40} mood="happy" />
+          <SeedAvatar size={52} mood="happy" />
           <Typography sx={{ color: 'text.primary', fontWeight: 700 }}>시드와 대화하기</Typography>
         </Stack>
 

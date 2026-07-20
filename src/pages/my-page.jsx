@@ -29,7 +29,7 @@ function MyPage() {
         <Card sx={{ borderRadius: 3, mb: 3 }}>
           <CardContent>
             <Stack direction="row" spacing={2} alignItems="center">
-              <SeedAvatar size={56} mood="default" />
+              <SeedAvatar size={76} mood="default" />
               <Box>
                 <Typography sx={{ color: 'text.primary', fontWeight: 700 }}>
                   {loading ? '불러오는 중...' : (user?.nickname ?? '알 수 없음')}

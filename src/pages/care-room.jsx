@@ -36,7 +36,7 @@ function CareRoom() {
 
       <Container maxWidth="sm" sx={{ textAlign: 'center' }}>
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
-          <SeedAvatar size={72} mood="default" />
+          <SeedAvatar size={100} mood="default" />
         </Box>
         <Typography variant="h5" sx={{ color: '#FFFFFF', fontWeight: 700, mb: 2 }}>
           나만의 심리 케어

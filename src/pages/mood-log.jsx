@@ -146,7 +146,7 @@ function MoodLog() {
           ))}
         </Grid>
 
-        <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 3 }}>
+        <Stack direction="row" spacing={2} justifyContent="center" useFlexGap sx={{ mb: 3, width: '100%' }}>
           {iconRow.map((item) => (
             <Box key={item.label} sx={{ textAlign: 'center' }}>
               <IconButton sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>{item.icon}</IconButton>
@@ -173,7 +173,7 @@ function MoodLog() {
                     transition: 'all 0.2s ease',
                   }}
                 >
-                  <SeedAvatar size={48} mood={item.mood} />
+                  <SeedAvatar size={64} mood={item.mood} />
                   <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', mt: 0.5 }}>{item.label}</Typography>
                 </Box>
               ))}
