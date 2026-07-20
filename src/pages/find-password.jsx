@@ -72,7 +72,7 @@ function FindPassword() {
   }
 
   return (
-    <Box sx={{ width: '100%', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', py: { xs: 4, md: 8 } }}>
+    <Box sx={{ width: '100%', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', py: { xs: 4, md: 8 }, backgroundImage: (theme) => `radial-gradient(ellipse 70% 50% at 50% 0%, ${theme.palette.primary.light}33, transparent 70%)` }}>
       <Container maxWidth="sm">
         <Card sx={{ borderRadius: 3 }}>
           <CardContent sx={{ p: { xs: 3, md: 5 }, textAlign: 'center' }}>

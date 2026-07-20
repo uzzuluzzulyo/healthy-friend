@@ -57,11 +57,13 @@ function Login() {
         justifyContent: 'center',
         alignItems: 'center',
         py: { xs: 4, md: 8 },
+        backgroundImage: (theme) =>
+          `radial-gradient(ellipse 70% 50% at 50% 0%, ${theme.palette.primary.light}33, transparent 70%)`,
       }}
     >
       <Container maxWidth="sm">
-        <Card sx={{ borderRadius: 3 }}>
-          <CardContent sx={{ p: { xs: 3, md: 5 }, textAlign: 'center' }}>
+        <Card sx={{ borderRadius: 4 }}>
+          <CardContent sx={{ p: { xs: 3.5, md: 5.5 }, textAlign: 'center' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
               <SeedAvatar size={104} mood="default" />
             </Box>
