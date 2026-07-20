@@ -175,14 +175,16 @@ function MoodLog() {
           ))}
         </Grid>
 
-        <Stack direction="row" spacing={2} justifyContent="center" useFlexGap sx={{ mb: 3, width: '100%' }}>
-          {iconRow.map((item) => (
-            <Box key={item.label} sx={{ textAlign: 'center' }}>
-              <IconButton sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>{item.icon}</IconButton>
-              <Typography sx={{ color: 'text.secondary', fontSize: '0.7rem', mt: 0.3 }}>{item.label}</Typography>
-            </Box>
-          ))}
-        </Stack>
+        <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: { xs: 2, sm: 3 } }}>
+            {iconRow.map((item) => (
+              <Box key={item.label} sx={{ textAlign: 'center' }}>
+                <IconButton sx={{ bgcolor: 'background.default', color: 'text.secondary' }}>{item.icon}</IconButton>
+                <Typography sx={{ color: 'text.secondary', fontSize: '0.7rem', mt: 0.3 }}>{item.label}</Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
 
         <Card sx={{ borderRadius: 3, mb: 3 }}>
           <CardContent>
