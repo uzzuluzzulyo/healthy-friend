@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import LinearProgress from '@mui/material/LinearProgress';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
-import MusicNoteRoundedIcon from '@mui/icons-material/MusicNoteRounded';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { useNavigate } from 'react-router-dom';
 import SeedAvatar from '../components/ui/seed-avatar.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
@@ -16,6 +16,19 @@ import { getCurrentUserId } from '../lib/auth.js';
 
 const STEP_GOAL = 10000;
 const WATER_GOAL_ML = 1500;
+
+const SONGS = [
+  {
+    tag: '#신나는',
+    title: 'NCT WISH - Boy Meets Girl',
+    videoId: '2derLGPaliE',
+  },
+  {
+    tag: '#즐겨 듣는 노래',
+    title: 'NCT WISH - YO-I-DON!',
+    videoId: 'E1d8dVSs0Bg',
+  },
+];
 
 function Home() {
   const navigate = useNavigate();
@@ -65,25 +78,46 @@ function Home() {
               신나는 노래로 기분 전환은 어떠신가요?
             </Typography>
             <Grid container spacing={1.5}>
-              {[
-                { tag: '#신나는' },
-                { tag: '#즐겨 듣는 노래' },
-              ].map((item) => (
-                <Grid key={item.tag} size={6}>
+              {SONGS.map((song) => (
+                <Grid key={song.tag} size={6}>
                   <Box
-                    sx={{
-                      borderRadius: 2,
-                      bgcolor: 'primary.light',
-                      aspectRatio: '1.6',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      mb: 0.5,
-                    }}
+                    component="a"
+                    href={`https://www.youtube.com/watch?v=${song.videoId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ textDecoration: 'none', display: 'block' }}
                   >
-                    <MusicNoteRoundedIcon sx={{ color: 'primary.contrastText', fontSize: 28 }} />
+                    <Box
+                      sx={{
+                        position: 'relative',
+                        borderRadius: 2,
+                        overflow: 'hidden',
+                        aspectRatio: '1.6',
+                        mb: 0.5,
+                        backgroundImage: `url(https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg)`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        bgcolor: 'primary.light',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          inset: 0,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          bgcolor: 'rgba(0,0,0,0.25)',
+                        }}
+                      >
+                        <PlayArrowRoundedIcon sx={{ color: '#FFFFFF', fontSize: 32 }} />
+                      </Box>
+                    </Box>
+                    <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem' }}>{song.tag}</Typography>
+                    <Typography sx={{ color: 'text.primary', fontSize: '0.8rem', fontWeight: 600 }}>
+                      {song.title}
+                    </Typography>
                   </Box>
-                  <Typography sx={{ color: 'text.secondary', fontSize: '0.8rem' }}>{item.tag}</Typography>
                 </Grid>
               ))}
             </Grid>
