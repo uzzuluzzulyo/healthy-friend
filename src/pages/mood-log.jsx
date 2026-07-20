@@ -9,8 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
-import PsychologyRoundedIcon from '@mui/icons-material/PsychologyRounded';
-import SpaRoundedIcon from '@mui/icons-material/SpaRounded';
+import CardGiftcardRoundedIcon from '@mui/icons-material/CardGiftcardRounded';
 import PsychologyAltRoundedIcon from '@mui/icons-material/PsychologyAltRounded';
 import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
@@ -93,15 +92,30 @@ function MoodLog() {
           나의 심리 기록
         </Typography>
 
-        <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem', mb: 2 }}>
-          오늘 {user?.nickname ?? '헬시'}님은 많이 지쳐군요.. 다양한 심리테스트를 통해 지친 하루를 달래보아요!
-        </Typography>
+        <Stack direction="row" spacing={1.5} alignItems="flex-start" sx={{ mb: 2 }}>
+          <SeedAvatar size={40} mood="sad" />
+          <Box
+            sx={{
+              bgcolor: 'background.paper',
+              border: '1px solid',
+              borderColor: 'divider',
+              borderRadius: 3,
+              borderTopLeftRadius: 4,
+              px: 2,
+              py: 1.5,
+            }}
+          >
+            <Typography sx={{ color: 'text.primary', fontSize: '0.85rem' }}>
+              오늘 {user?.nickname ?? '헬시'}님은 많이 지쳐군요.. 다양한 심리테스트를 통해 지친 하루를 달래보아요!
+            </Typography>
+          </Box>
+        </Stack>
 
         <Grid container spacing={1.5} sx={{ mb: 2 }}>
           <Grid size={6}>
             <Card sx={{ borderRadius: 3, height: '100%' }}>
               <CardContent sx={{ textAlign: 'center', py: 3 }}>
-                <PsychologyRoundedIcon sx={{ color: 'primary.main', fontSize: 32, mb: 1 }} />
+                <CardGiftcardRoundedIcon sx={{ color: '#F5A623', fontSize: 32, mb: 1 }} />
                 <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: '0.85rem' }}>
                   전문가와 상담하기
                 </Typography>
@@ -111,7 +125,7 @@ function MoodLog() {
           <Grid size={6}>
             <Card sx={{ borderRadius: 3, height: '100%', cursor: 'pointer' }} onClick={() => navigate('/care')}>
               <CardContent sx={{ textAlign: 'center', py: 3 }}>
-                <SpaRoundedIcon sx={{ color: 'primary.main', fontSize: 32, mb: 1 }} />
+                <CardGiftcardRoundedIcon sx={{ color: '#FFC93C', fontSize: 32, mb: 1 }} />
                 <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: '0.85rem' }}>
                   나만의 심리 케어실
                 </Typography>
@@ -121,24 +135,40 @@ function MoodLog() {
         </Grid>
 
         <Grid container spacing={1.5} sx={{ mb: 2 }}>
-          {testCards.map((test) => (
+          {testCards.map((test, index) => (
             <Grid key={test.title} size={6}>
-              <Card sx={{ borderRadius: 3, height: '100%' }}>
-                <CardContent>
-                  <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: '0.85rem', mb: 0.5 }}>
+              <Card sx={{ borderRadius: 3, height: '100%', overflow: 'hidden' }}>
+                <Box
+                  sx={{
+                    bgcolor: index === 0 ? '#FFB74D' : 'background.default',
+                    background: index === 0 ? 'linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%)' : undefined,
+                    px: 2,
+                    pt: 2,
+                    pb: 1,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: index === 0 ? '#FFFFFF' : 'text.primary',
+                      fontWeight: 700,
+                      fontSize: '0.85rem',
+                      mb: 0.5,
+                    }}
+                  >
                     {test.title}
                   </Typography>
-                  <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', mb: 1.5 }}>
+                  <Typography sx={{ color: index === 0 ? '#FFFFFF' : 'text.secondary', fontSize: '0.7rem', opacity: 0.9 }}>
                     {test.subtitle}
                   </Typography>
+                </Box>
+                <CardContent sx={{ pt: 1.5 }}>
                   <Button
                     size="small"
-                    disabled
                     fullWidth
-                    variant="outlined"
-                    sx={{ color: 'text.disabled', borderColor: 'divider' }}
+                    variant="contained"
+                    sx={{ bgcolor: 'primary.main', fontWeight: 700, '&:hover': { bgcolor: 'primary.dark' } }}
                   >
-                    준비 중
+                    시작하기
                   </Button>
                 </CardContent>
               </Card>
@@ -160,24 +190,25 @@ function MoodLog() {
             <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem', mb: 2, textAlign: 'center' }}>
               오늘 헬시님의 하루는 어떤 하루였나요?
             </Typography>
-            <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 2 }}>
+            <Grid container spacing={2} justifyContent="center" sx={{ mb: 2, maxWidth: 260, mx: 'auto' }}>
               {moods.map((item) => (
-                <Box
-                  key={item.label}
-                  onClick={() => setSelectedMood(item.label)}
-                  sx={{
-                    cursor: 'pointer',
-                    textAlign: 'center',
-                    opacity: selectedMood === item.label ? 1 : 0.5,
-                    transform: selectedMood === item.label ? 'scale(1.1)' : 'none',
-                    transition: 'all 0.2s ease',
-                  }}
-                >
-                  <SeedAvatar size={64} mood={item.mood} />
-                  <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', mt: 0.5 }}>{item.label}</Typography>
-                </Box>
+                <Grid key={item.label} size={6} sx={{ textAlign: 'center' }}>
+                  <Box
+                    onClick={() => setSelectedMood(item.label)}
+                    sx={{
+                      cursor: 'pointer',
+                      display: 'inline-block',
+                      opacity: selectedMood === item.label ? 1 : 0.5,
+                      transform: selectedMood === item.label ? 'scale(1.1)' : 'none',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    <SeedAvatar size={64} mood={item.mood} />
+                    <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', mt: 0.5 }}>{item.label}</Typography>
+                  </Box>
+                </Grid>
               ))}
-            </Stack>
+            </Grid>
             <TextField
               label="메모 (선택)"
               value={note}
