@@ -24,7 +24,7 @@ import { getCurrentUserId } from '../lib/auth.js';
 
 const moods = [
   { label: '행복', mood: 'happy' },
-  { label: '그럭저럭', mood: 'default' },
+  { label: '그럭저럭', mood: 'meh' },
   { label: '슬픔', mood: 'sad' },
   { label: '화남', mood: 'angry' },
 ];

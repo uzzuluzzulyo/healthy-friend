@@ -1,10 +1,15 @@
 import seedDefault from '../../assets/seed-default.png';
+import seedHappy from '../../assets/seed-happy.png';
+import seedSad from '../../assets/seed-sad.png';
+import seedAngry from '../../assets/seed-angry.png';
+import seedMeh from '../../assets/seed-meh.png';
 
 const MOOD_IMAGES = {
   default: seedDefault,
-  happy: seedDefault,
-  sad: seedDefault,
-  angry: seedDefault,
+  happy: seedHappy,
+  sad: seedSad,
+  angry: seedAngry,
+  meh: seedMeh,
 };
 
 /**
@@ -14,7 +19,7 @@ const MOOD_IMAGES = {
  *
  * Props:
  * @param {number} size - 아바타 크기(px) [Optional, 기본값: 56]
- * @param {'default'|'happy'|'sad'|'angry'} mood - 표정 [Optional, 기본값: 'default']
+ * @param {'default'|'happy'|'sad'|'angry'|'meh'} mood - 표정 [Optional, 기본값: 'default']
  *
  * Example usage:
  * <SeedAvatar size={80} mood="happy" />
