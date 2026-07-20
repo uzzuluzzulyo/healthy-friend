@@ -2,18 +2,19 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import Box from '@mui/material/Box';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import DirectionsRunRoundedIcon from '@mui/icons-material/DirectionsRunRounded';
-import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
-import MoodRoundedIcon from '@mui/icons-material/MoodRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 
 const navItems = [
   { label: '홈', path: '/', icon: <HomeRoundedIcon /> },
-  { label: '건강기록', path: '/health', icon: <DirectionsRunRoundedIcon /> },
-  { label: '시드채팅', path: '/chat', icon: <ChatBubbleRoundedIcon /> },
-  { label: '심리기록', path: '/mood', icon: <MoodRoundedIcon /> },
   { label: '마이', path: '/my', icon: <PersonRoundedIcon /> },
+  { label: '헬시프렌드', path: '/health-hub', icon: <FavoriteRoundedIcon />, isMain: true },
+  { label: '검색', path: null, icon: <SearchRoundedIcon /> },
+  { label: '메뉴', path: null, icon: <MenuRoundedIcon /> },
 ];
 
 const hiddenPaths = ['/login', '/signup', '/find-id', '/find-password', '/care'];
@@ -34,21 +35,42 @@ function Navbar() {
       <BottomNavigation
         showLabels
         value={location.pathname}
-        onChange={(event, newValue) => navigate(newValue)}
+        onChange={(event, newValue) => {
+          if (newValue) navigate(newValue);
+        }}
         sx={{
           '& .Mui-selected': {
             color: 'primary.main',
           },
         }}
       >
-        {navItems.map((item) => (
-          <BottomNavigationAction
-            key={item.path}
-            label={item.label}
-            value={item.path}
-            icon={item.icon}
-          />
-        ))}
+        {navItems.map((item) =>
+          item.isMain ? (
+            <BottomNavigationAction
+              key={item.label}
+              label={item.label}
+              value={item.path}
+              icon={
+                <Box
+                  sx={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: '50%',
+                    bgcolor: 'primary.light',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'primary.contrastText',
+                  }}
+                >
+                  {item.icon}
+                </Box>
+              }
+            />
+          ) : (
+            <BottomNavigationAction key={item.label} label={item.label} value={item.path} icon={item.icon} />
+          ),
+        )}
       </BottomNavigation>
     </Paper>
   );

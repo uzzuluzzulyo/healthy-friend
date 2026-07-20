@@ -58,7 +58,9 @@ function Home() {
     <Box sx={{ width: '100%', pb: 10 }}>
       <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
         <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
-          <SeedAvatar size={88} mood="happy" />
+          <Box onClick={() => navigate('/chat')} sx={{ cursor: 'pointer' }}>
+            <SeedAvatar size={88} mood="happy" />
+          </Box>
           <Box>
             <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: { xs: '1.2rem', md: '1.4rem' } }}>
               {user?.nickname ?? '헬시'}님,
