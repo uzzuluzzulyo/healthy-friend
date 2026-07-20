@@ -1,12 +1,12 @@
-const BODY_COLOR = '#7DD9C4';
-const BODY_STROKE = '#4FB89E';
-const LEAF_COLOR = '#4CAF7D';
-const FACE_COLOR = '#1A2733';
+const BODY_COLOR = '#4FB89E';
+const LEAF_COLOR = '#3D9E86';
+const EYE_RING_COLOR = '#FFFFFF';
 
 /**
  * SeedAvatar 컴포넌트
  *
- * 마스코트 캐릭터 "시드"(새싹 블롭)를 표현하는 아바타. 표정에 따라 눈/입/장식이 바뀐다.
+ * 마스코트 캐릭터 "시드"(새싹 블롭)를 표현하는 아바타.
+ * 플랫한 실루엣 + 크고 동그란 링 모양 눈 + 볼터치가 특징이며, 표정에 따라 눈/입이 바뀐다.
  *
  * Props:
  * @param {number} size - 아바타 크기(px) [Optional, 기본값: 56]
@@ -22,51 +22,43 @@ function SeedAvatar({ size = 56, mood = 'default' }) {
 
   return (
     <svg width={size} height={size} viewBox="0 0 120 120">
-      {/* 몸통 */}
-      <ellipse cx="60" cy="68" rx="40" ry="36" fill={BODY_COLOR} stroke={BODY_STROKE} strokeWidth="2" />
+      {/* 새싹 줄기 + 잎 (몸통 뒤로) */}
+      <line x1="60" y1="34" x2="60" y2="18" stroke={LEAF_COLOR} strokeWidth="4" strokeLinecap="round" />
+      <ellipse cx="50" cy="16" rx="10" ry="6" fill={LEAF_COLOR} transform="rotate(-35 50 16)" />
+      <ellipse cx="70" cy="16" rx="10" ry="6" fill={LEAF_COLOR} transform="rotate(35 70 16)" />
 
-      {/* 화남: 상단에 붉은 기운 */}
-      {isAngry && <ellipse cx="60" cy="42" rx="34" ry="16" fill="#FF6B6B" opacity="0.35" />}
+      {/* 몸통 (플랫 실루엣) */}
+      <ellipse cx="60" cy="68" rx="42" ry="38" fill={BODY_COLOR} />
 
-      {/* 새싹 줄기 + 잎 */}
-      <line x1="60" y1="32" x2="60" y2="16" stroke={LEAF_COLOR} strokeWidth="4" strokeLinecap="round" />
-      <ellipse cx="50" cy="15" rx="10" ry="6" fill={LEAF_COLOR} transform="rotate(-35 50 15)" />
-      <ellipse cx="70" cy="15" rx="10" ry="6" fill={LEAF_COLOR} transform="rotate(35 70 15)" />
+      {/* 아래쪽 발 (귀여움 포인트) */}
+      <ellipse cx="34" cy="100" rx="10" ry="8" fill={BODY_COLOR} />
+      <ellipse cx="86" cy="100" rx="10" ry="8" fill={BODY_COLOR} />
 
       {/* 화남: 찌푸린 눈썹 */}
       {isAngry && (
         <>
-          <line x1="36" y1="50" x2="48" y2="54" stroke={FACE_COLOR} strokeWidth="3" strokeLinecap="round" />
-          <line x1="84" y1="50" x2="72" y2="54" stroke={FACE_COLOR} strokeWidth="3" strokeLinecap="round" />
+          <line x1="32" y1="48" x2="46" y2="54" stroke={EYE_RING_COLOR} strokeWidth="4" strokeLinecap="round" />
+          <line x1="88" y1="48" x2="74" y2="54" stroke={EYE_RING_COLOR} strokeWidth="4" strokeLinecap="round" />
         </>
       )}
 
-      {/* 눈 */}
-      <circle cx="46" cy="62" r="5" fill={FACE_COLOR} />
-      <circle cx="74" cy="62" r="5" fill={FACE_COLOR} />
+      {/* 볼터치 */}
+      <ellipse cx="34" cy="76" rx="7" ry="4.5" fill="#FF9EB5" opacity={isHappy ? 0.9 : 0.55} />
+      <ellipse cx="86" cy="76" rx="7" ry="4.5" fill="#FF9EB5" opacity={isHappy ? 0.9 : 0.55} />
 
-      {/* 행복: 볼터치 */}
-      {isHappy && (
-        <>
-          <ellipse cx="36" cy="76" rx="6" ry="4" fill="#FF9EB5" opacity="0.7" />
-          <ellipse cx="84" cy="76" rx="6" ry="4" fill="#FF9EB5" opacity="0.7" />
-        </>
-      )}
+      {/* 눈: 크고 동그란 링(도넛) 모양 */}
+      <circle cx="44" cy="62" r="12" fill="none" stroke={EYE_RING_COLOR} strokeWidth="6" />
+      <circle cx="76" cy="62" r="12" fill="none" stroke={EYE_RING_COLOR} strokeWidth="6" />
 
       {/* 슬픔: 눈물 */}
-      {isSad && (
-        <path
-          d="M 78 68 Q 82 76 78 82 Q 74 76 78 68 Z"
-          fill="#6EC3F4"
-        />
-      )}
+      {isSad && <path d="M 80 74 Q 85 82 80 88 Q 75 82 80 74 Z" fill="#8FD8FF" />}
 
       {/* 입 */}
-      {isHappy && <path d="M 46 82 Q 60 94 74 82" stroke={FACE_COLOR} strokeWidth="3" fill="none" strokeLinecap="round" />}
-      {isSad && <path d="M 46 88 Q 60 78 74 88" stroke={FACE_COLOR} strokeWidth="3" fill="none" strokeLinecap="round" />}
-      {isAngry && <path d="M 46 84 L 74 84" stroke={FACE_COLOR} strokeWidth="3" fill="none" strokeLinecap="round" />}
+      {isHappy && <path d="M 46 86 Q 60 96 74 86" stroke={EYE_RING_COLOR} strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.9" />}
+      {isSad && <path d="M 46 92 Q 60 84 74 92" stroke={EYE_RING_COLOR} strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.9" />}
+      {isAngry && <path d="M 48 88 L 72 88" stroke={EYE_RING_COLOR} strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.9" />}
       {!isHappy && !isSad && !isAngry && (
-        <path d="M 48 83 Q 60 87 72 83" stroke={FACE_COLOR} strokeWidth="3" fill="none" strokeLinecap="round" />
+        <path d="M 50 87 Q 60 91 70 87" stroke={EYE_RING_COLOR} strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.9" />
       )}
     </svg>
   );
