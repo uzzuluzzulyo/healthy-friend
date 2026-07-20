@@ -5,8 +5,6 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import SeedAvatar from '../components/ui/seed-avatar.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { logout } from '../lib/auth.js';
 
@@ -28,15 +26,10 @@ function MyPage() {
 
         <Card sx={{ borderRadius: 3, mb: 3 }}>
           <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
-            <Stack direction="row" spacing={2.5} alignItems="center">
-              <SeedAvatar size={96} mood="default" />
-              <Box>
-                <Typography sx={{ color: 'text.primary', fontWeight: 700 }}>
-                  {loading ? '불러오는 중...' : (user?.nickname ?? '알 수 없음')}
-                </Typography>
-                <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem' }}>{user?.email}</Typography>
-              </Box>
-            </Stack>
+            <Typography sx={{ color: 'text.primary', fontWeight: 700 }}>
+              {loading ? '불러오는 중...' : (user?.nickname ?? '알 수 없음')}
+            </Typography>
+            <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem' }}>{user?.email}</Typography>
           </CardContent>
         </Card>
 

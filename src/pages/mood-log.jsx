@@ -17,7 +17,6 @@ import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import { useNavigate } from 'react-router-dom';
 import PageHeader from '../components/common/page-header.jsx';
-import SeedAvatar from '../components/ui/seed-avatar.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
 import { getCurrentUserId } from '../lib/auth.js';
@@ -91,24 +90,21 @@ function MoodLog() {
       <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
         <PageHeader title="나의 심리 기록" backTo="/health-hub" />
 
-        <Stack direction="row" spacing={1.5} alignItems="flex-start" sx={{ mb: 2 }}>
-          <SeedAvatar size={52} mood="sad" />
-          <Box
-            sx={{
-              bgcolor: 'background.paper',
-              border: '1px solid',
-              borderColor: 'divider',
-              borderRadius: 3,
-              borderTopLeftRadius: 4,
-              px: 2,
-              py: 1.5,
-            }}
-          >
-            <Typography sx={{ color: 'text.primary', fontSize: '0.85rem' }}>
-              오늘 {user?.nickname ?? '헬시'}님은 많이 지쳐군요.. 다양한 심리테스트를 통해 지친 하루를 달래보아요!
-            </Typography>
-          </Box>
-        </Stack>
+        <Box
+          sx={{
+            bgcolor: 'background.paper',
+            border: '1px solid',
+            borderColor: 'divider',
+            borderRadius: 3,
+            px: 2,
+            py: 1.5,
+            mb: 2,
+          }}
+        >
+          <Typography sx={{ color: 'text.primary', fontSize: '0.85rem' }}>
+            오늘 {user?.nickname ?? '헬시'}님은 많이 지쳐군요.. 다양한 심리테스트를 통해 지친 하루를 달래보아요!
+          </Typography>
+        </Box>
 
         <Grid container spacing={1.5} sx={{ mb: 2 }}>
           <Grid size={6}>
@@ -201,22 +197,31 @@ function MoodLog() {
             <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem', mb: 2, textAlign: 'center' }}>
               오늘 헬시님의 하루는 어떤 하루였나요?
             </Typography>
-            <Grid container spacing={2} justifyContent="center" sx={{ mb: 2, maxWidth: 260, mx: 'auto' }}>
+            <Grid container spacing={1.5} sx={{ mb: 2 }}>
               {moods.map((item) => (
-                <Grid key={item.label} size={6} sx={{ textAlign: 'center' }}>
-                  <Box
+                <Grid key={item.label} size={6}>
+                  <Card
+                    variant="outlined"
                     onClick={() => setSelectedMood(item.label)}
                     sx={{
                       cursor: 'pointer',
-                      display: 'inline-block',
-                      opacity: selectedMood === item.label ? 1 : 0.5,
-                      transform: selectedMood === item.label ? 'scale(1.1)' : 'none',
+                      borderWidth: 2,
+                      borderColor: selectedMood === item.label ? 'primary.main' : 'divider',
+                      bgcolor: selectedMood === item.label ? 'background.default' : 'transparent',
                       transition: 'all 0.2s ease',
                     }}
                   >
-                    <SeedAvatar size={80} mood={item.mood} />
-                    <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', mt: 0.5 }}>{item.label}</Typography>
-                  </Box>
+                    <CardContent sx={{ textAlign: 'center', py: 1.5 }}>
+                      <Typography
+                        sx={{
+                          color: selectedMood === item.label ? 'primary.main' : 'text.secondary',
+                          fontWeight: selectedMood === item.label ? 700 : 500,
+                        }}
+                      >
+                        {item.label}
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
               ))}
             </Grid>

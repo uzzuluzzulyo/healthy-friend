@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import SeedAvatar from '../components/ui/seed-avatar.jsx';
 import oceanBg from '../assets/ocean-bg.jpg';
 
 function CareRoom() {
@@ -31,10 +30,6 @@ function CareRoom() {
       >
         <ArrowBackRoundedIcon />
       </IconButton>
-
-      <Box sx={{ position: 'absolute', bottom: 140, right: 24 }}>
-        <SeedAvatar size={96} mood="default" />
-      </Box>
 
       <Box sx={{ position: 'absolute', bottom: 48, left: 24, right: 24 }}>
         <Typography variant="h5" sx={{ color: '#FFFFFF', fontWeight: 700, mb: 1 }}>

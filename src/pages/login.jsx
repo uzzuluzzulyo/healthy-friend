@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import SeedAvatar from '../components/ui/seed-avatar.jsx';
 import { supabase } from '../lib/supabase.js';
 import { login } from '../lib/auth.js';
 
@@ -64,9 +63,6 @@ function Login() {
       <Container maxWidth="sm">
         <Card sx={{ borderRadius: 4 }}>
           <CardContent sx={{ p: { xs: 3.5, md: 5.5 }, textAlign: 'center' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-              <SeedAvatar size={104} mood="default" />
-            </Box>
             <Typography variant="h4" sx={{ color: 'text.primary', fontWeight: 700, mb: 3, fontSize: { xs: '1.75rem', md: '2.25rem' } }}>
               로그인
             </Typography>

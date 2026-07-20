@@ -9,7 +9,6 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { useNavigate } from 'react-router-dom';
-import SeedAvatar from '../components/ui/seed-avatar.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
 import { getCurrentUserId } from '../lib/auth.js';
@@ -57,19 +56,16 @@ function Home() {
   return (
     <Box sx={{ width: '100%', pb: 10 }}>
       <Container maxWidth="sm" sx={{ pt: { xs: 7, md: 9 }, pb: { xs: 3, md: 6 } }}>
-        <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
-          <Box onClick={() => navigate('/chat')} sx={{ cursor: 'pointer', flexShrink: 0 }}>
-            <SeedAvatar size={112} mood="happy" />
-          </Box>
-          <Box>
+        <Card sx={{ borderRadius: 3, mb: 3, cursor: 'pointer' }} onClick={() => navigate('/chat')}>
+          <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
             <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: { xs: '1.2rem', md: '1.4rem' } }}>
               {user?.nickname ?? '헬시'}님,
             </Typography>
             <Typography sx={{ color: 'text.secondary', fontSize: '0.95rem' }}>
-              오늘 하루도 저와 함께 건강 챙겨봐요!
+              오늘 하루도 저와 함께 건강 챙겨봐요! (탭해서 시드와 대화하기)
             </Typography>
-          </Box>
-        </Stack>
+          </CardContent>
+        </Card>
 
         <Card sx={{ borderRadius: 3, mb: 3 }}>
           <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
