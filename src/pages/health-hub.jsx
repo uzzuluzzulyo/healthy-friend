@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
 import MonitorHeartRoundedIcon from '@mui/icons-material/MonitorHeartRounded';
+import PageHeader from '../components/common/page-header.jsx';
 
 const options = [
   { key: 'mood', label: '나의 심리 기록', icon: <MenuBookRoundedIcon sx={{ fontSize: 32 }} />, path: '/mood' },
@@ -24,9 +25,7 @@ function HealthHub() {
   return (
     <Box sx={{ width: '100%', minHeight: '100vh', display: 'flex', alignItems: 'center', pb: 10 }}>
       <Container maxWidth="sm">
-        <Typography variant="h5" sx={{ color: 'text.primary', fontWeight: 700, mb: 3, textAlign: 'center' }}>
-          나의 건강 LOG
-        </Typography>
+        <PageHeader title="나의 건강 LOG" backTo="/" />
 
         <Grid container spacing={2} sx={{ mb: 3 }}>
           {options.map((option) => (

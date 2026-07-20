@@ -10,6 +10,7 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import RestaurantRoundedIcon from '@mui/icons-material/RestaurantRounded';
+import PageHeader from '../components/common/page-header.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
 import { getCurrentUserId } from '../lib/auth.js';
@@ -74,9 +75,7 @@ function HealthLog() {
   return (
     <Box sx={{ width: '100%', pb: 10 }}>
       <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
-        <Typography variant="h5" sx={{ color: 'text.primary', fontWeight: 700, mb: 3 }}>
-          나의 건강 기록
-        </Typography>
+        <PageHeader title="나의 건강 기록" backTo="/health-hub" />
 
         <Card sx={{ borderRadius: 3, mb: 2 }}>
           <CardContent>

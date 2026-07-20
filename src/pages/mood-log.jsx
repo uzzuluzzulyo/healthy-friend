@@ -16,6 +16,7 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import { useNavigate } from 'react-router-dom';
+import PageHeader from '../components/common/page-header.jsx';
 import SeedAvatar from '../components/ui/seed-avatar.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
@@ -88,9 +89,7 @@ function MoodLog() {
   return (
     <Box sx={{ width: '100%', pb: 10 }}>
       <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
-        <Typography variant="h5" sx={{ color: 'text.primary', fontWeight: 700, mb: 3 }}>
-          나의 심리 기록
-        </Typography>
+        <PageHeader title="나의 심리 기록" backTo="/health-hub" />
 
         <Stack direction="row" spacing={1.5} alignItems="flex-start" sx={{ mb: 2 }}>
           <SeedAvatar size={40} mood="sad" />
