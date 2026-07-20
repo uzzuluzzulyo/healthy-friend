@@ -29,7 +29,7 @@ const theme = createTheme({
     divider: 'rgba(26, 39, 51, 0.08)',
   },
   shape: {
-    borderRadius: 16,
+    borderRadius: 4,
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -43,7 +43,7 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 20,
+          borderRadius: 12,
           boxShadow: '0 2px 12px rgba(26, 39, 51, 0.06)',
         },
       },

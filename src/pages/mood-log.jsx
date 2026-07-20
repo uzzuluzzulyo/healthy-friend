@@ -114,7 +114,7 @@ function MoodLog() {
           <Grid size={6}>
             <Card sx={{ borderRadius: 3, height: '100%' }}>
               <CardContent sx={{ textAlign: 'center', py: 3 }}>
-                <CardGiftcardRoundedIcon sx={{ color: '#F5A623', fontSize: 32, mb: 1 }} />
+                <CardGiftcardRoundedIcon sx={{ color: 'primary.main', fontSize: 32, mb: 1 }} />
                 <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: '0.85rem' }}>
                   전문가와 상담하기
                 </Typography>
@@ -124,7 +124,7 @@ function MoodLog() {
           <Grid size={6}>
             <Card sx={{ borderRadius: 3, height: '100%', cursor: 'pointer' }} onClick={() => navigate('/care')}>
               <CardContent sx={{ textAlign: 'center', py: 3 }}>
-                <CardGiftcardRoundedIcon sx={{ color: '#FFC93C', fontSize: 32, mb: 1 }} />
+                <CardGiftcardRoundedIcon sx={{ color: 'accent.main', fontSize: 32, mb: 1 }} />
                 <Typography sx={{ color: 'text.primary', fontWeight: 700, fontSize: '0.85rem' }}>
                   나만의 심리 케어실
                 </Typography>
@@ -139,8 +139,8 @@ function MoodLog() {
               <Card sx={{ borderRadius: 3, height: '100%', overflow: 'hidden' }}>
                 <Box
                   sx={{
-                    bgcolor: index === 0 ? '#FFB74D' : 'background.default',
-                    background: index === 0 ? 'linear-gradient(135deg, #FFB74D 0%, #FF8A65 100%)' : undefined,
+                    bgcolor: index === 0 ? 'primary.main' : 'background.default',
+                    background: index === 0 ? 'linear-gradient(135deg, #388DC6 0%, #1CD9E8 100%)' : undefined,
                     px: 2,
                     pt: 2,
                     pb: 1,
