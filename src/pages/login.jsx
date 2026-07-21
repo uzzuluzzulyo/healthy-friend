@@ -79,9 +79,6 @@ function Login() {
               >
                 {submitting ? '확인 중...' : '로그인'}
               </Button>
-              <Typography component={NavLink} to="/signup" sx={{ color: 'text.secondary', fontSize: '0.85rem', textDecoration: 'none', mt: 1 }}>
-                계정이 없으신가요? 회원가입
-              </Typography>
               <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
                 <Typography component={NavLink} to="/find-id" sx={{ color: 'text.secondary', fontSize: '0.8rem', textDecoration: 'none' }}>
                   아이디 찾기
