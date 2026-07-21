@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
 import MonitorHeartRoundedIcon from '@mui/icons-material/MonitorHeartRounded';
-import PageHeader from '../components/common/page-header.jsx';
+import GradientHeader from '../components/common/gradient-header.jsx';
 
 const options = [
   { key: 'mood', label: '나의 심리 기록', icon: <MenuBookRoundedIcon sx={{ fontSize: 32 }} />, path: '/mood' },
@@ -23,10 +23,10 @@ function HealthHub() {
   const selectedOption = options.find((option) => option.key === selected);
 
   return (
-    <Box sx={{ width: '100%', minHeight: '100vh', display: 'flex', alignItems: 'center', pb: 10 }}>
-      <Container maxWidth="sm">
-        <PageHeader title="나의 건강 LOG" backTo="/" />
+    <Box sx={{ width: '100%', pb: 10 }}>
+      <GradientHeader title="나의 건강 LOG" subtitle="오늘은 어떤 기록을 남겨볼까요?" backTo="/" />
 
+      <Container maxWidth="sm" sx={{ mt: -3, pb: { xs: 3, md: 6 } }}>
         <Grid container spacing={2} sx={{ mb: 3 }}>
           {options.map((option) => (
             <Grid key={option.key} size={6}>

@@ -8,7 +8,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import PageHeader from '../components/common/page-header.jsx';
+import GradientHeader from '../components/common/gradient-header.jsx';
 import { supabase } from '../lib/supabase.js';
 import { getCurrentUserId } from '../lib/auth.js';
 
@@ -35,9 +35,9 @@ function Search() {
 
   return (
     <Box sx={{ width: '100%', pb: 10 }}>
-      <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
-        <PageHeader title="내 기록 검색" backTo="/" />
+      <GradientHeader title="내 기록 검색" subtitle="지난 심리 기록을 검색해보세요" backTo="/" />
 
+      <Container maxWidth="sm" sx={{ mt: -3, pb: { xs: 3, md: 6 } }}>
         <Box component="form" onSubmit={handleSearch} sx={{ mb: 3 }}>
           <TextField
             value={query}

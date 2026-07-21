@@ -16,7 +16,7 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import { useNavigate } from 'react-router-dom';
-import PageHeader from '../components/common/page-header.jsx';
+import GradientHeader from '../components/common/gradient-header.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
 import { getCurrentUserId } from '../lib/auth.js';
@@ -87,24 +87,16 @@ function MoodLog() {
 
   return (
     <Box sx={{ width: '100%', pb: 10 }}>
-      <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
-        <PageHeader title="나의 심리 기록" backTo="/health-hub" />
+      <GradientHeader title="나의 심리 기록" subtitle="오늘 하루, 마음은 어떠셨나요?" backTo="/health-hub" />
 
-        <Box
-          sx={{
-            bgcolor: 'background.paper',
-            border: '1px solid',
-            borderColor: 'divider',
-            borderRadius: 3,
-            px: 2,
-            py: 1.5,
-            mb: 2,
-          }}
-        >
-          <Typography sx={{ color: 'text.primary', fontSize: '0.85rem' }}>
-            오늘 {user?.nickname ?? '헬시'}님은 많이 지쳐군요.. 다양한 심리테스트를 통해 지친 하루를 달래보아요!
-          </Typography>
-        </Box>
+      <Container maxWidth="sm" sx={{ mt: -3, pb: { xs: 3, md: 6 } }}>
+        <Card sx={{ borderRadius: 3, mb: 2 }}>
+          <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
+            <Typography sx={{ color: 'text.primary', fontSize: '0.85rem' }}>
+              오늘 {user?.nickname ?? '헬시'}님은 많이 지쳐군요.. 다양한 심리테스트를 통해 지친 하루를 달래보아요!
+            </Typography>
+          </CardContent>
+        </Card>
 
         <Grid container spacing={1.5} sx={{ mb: 2 }}>
           <Grid size={6}>

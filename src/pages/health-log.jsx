@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import RestaurantRoundedIcon from '@mui/icons-material/RestaurantRounded';
-import PageHeader from '../components/common/page-header.jsx';
+import GradientHeader from '../components/common/gradient-header.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
 import { getCurrentUserId } from '../lib/auth.js';
@@ -23,6 +23,29 @@ function getLevel(latest) {
   if (latest.steps < 3000 || latest.water_ml < 500) return '위험';
   if (latest.steps >= 8000 && latest.water_ml >= 1200) return '양호';
   return '보통';
+}
+
+function TrendChart({ data }) {
+  const max = Math.max(1, ...data.map((d) => d.steps));
+  return (
+    <Stack direction="row" spacing={1} alignItems="flex-end" sx={{ height: 90, px: 0.5 }}>
+      {data.map((d) => (
+        <Box key={d.log_date} sx={{ flex: 1, textAlign: 'center' }}>
+          <Box
+            sx={{
+              height: `${Math.max(6, (d.steps / max) * 70)}px`,
+              borderRadius: 1,
+              background: 'linear-gradient(180deg, #388DC6 0%, #1CD9E8 100%)',
+              mb: 0.5,
+            }}
+          />
+          <Typography sx={{ fontSize: '0.65rem', color: 'text.secondary' }}>
+            {d.log_date.slice(5).replace('-', '/')}
+          </Typography>
+        </Box>
+      ))}
+    </Stack>
+  );
 }
 
 function HealthLog() {
@@ -72,12 +95,14 @@ function HealthLog() {
     await fetchLogs();
   }
 
+  const trendData = [...logs].slice(0, 7).reverse();
+
   return (
     <Box sx={{ width: '100%', pb: 10 }}>
-      <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
-        <PageHeader title="나의 건강 기록" backTo="/health-hub" />
+      <GradientHeader title="나의 건강 기록" subtitle="오늘도 건강한 하루 보내세요" backTo="/health-hub" />
 
-        <Card sx={{ borderRadius: 3, mb: 3 }}>
+      <Container maxWidth="sm" sx={{ mt: -3, pb: { xs: 3, md: 6 } }}>
+        <Card sx={{ borderRadius: 3, mb: 2 }}>
           <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
             <Typography sx={{ color: 'text.primary', fontSize: '0.95rem', mb: 1.5 }}>
               {user?.nickname ?? '헬시'}님의 생활습관 지수는{' '}
@@ -111,7 +136,16 @@ function HealthLog() {
           </CardContent>
         </Card>
 
-        <Card sx={{ borderRadius: 3, mb: 3 }}>
+        {trendData.length > 1 && (
+          <Card sx={{ borderRadius: 3, mb: 2 }}>
+            <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
+              <Typography sx={{ color: 'text.primary', fontWeight: 700, mb: 1.5 }}>최근 걸음 수 추이</Typography>
+              <TrendChart data={trendData} />
+            </CardContent>
+          </Card>
+        )}
+
+        <Card sx={{ borderRadius: 3, mb: 2 }}>
           <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2.5, p: { xs: 2.5, md: 3.5 } }}>
             <Box
               sx={{

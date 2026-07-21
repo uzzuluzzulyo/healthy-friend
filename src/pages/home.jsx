@@ -11,6 +11,7 @@ import DirectionsWalkRoundedIcon from '@mui/icons-material/DirectionsWalkRounded
 import WaterDropRoundedIcon from '@mui/icons-material/WaterDropRounded';
 import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+import LocalFireDepartmentRoundedIcon from '@mui/icons-material/LocalFireDepartmentRounded';
 import { useNavigate } from 'react-router-dom';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { supabase } from '../lib/supabase.js';
@@ -85,10 +86,25 @@ function RingStat({ icon, label, value, goal, unit, color }) {
   );
 }
 
+function computeStreak(logDates) {
+  const dateSet = new Set(logDates);
+  const cursor = new Date();
+  const todayStr = cursor.toISOString().slice(0, 10);
+  if (!dateSet.has(todayStr)) cursor.setDate(cursor.getDate() - 1);
+
+  let streak = 0;
+  while (dateSet.has(cursor.toISOString().slice(0, 10))) {
+    streak += 1;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return streak;
+}
+
 function Home() {
   const navigate = useNavigate();
   const { user } = useCurrentUser();
   const [todayLog, setTodayLog] = useState(null);
+  const [streak, setStreak] = useState(0);
 
   useEffect(() => {
     const userId = getCurrentUserId();
@@ -104,6 +120,14 @@ function Home() {
       .limit(1)
       .maybeSingle()
       .then(({ data }) => setTodayLog(data));
+
+    supabase
+      .from('hf_health_logs')
+      .select('log_date')
+      .eq('user_id', userId)
+      .order('log_date', { ascending: false })
+      .limit(60)
+      .then(({ data }) => setStreak(computeStreak((data ?? []).map((row) => row.log_date))));
   }, []);
 
   const steps = todayLog?.steps ?? 0;
@@ -120,12 +144,36 @@ function Home() {
         }}
       >
         <Container maxWidth="sm">
-          <Typography sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', mb: 0.5 }}>
-            반가워요
-          </Typography>
-          <Typography sx={{ color: '#FFFFFF', fontWeight: 800, fontSize: { xs: '1.6rem', md: '2rem' }, mb: 2 }}>
-            {user?.nickname ?? '헬시'}님
-          </Typography>
+          <Stack direction="row" justifyContent="space-between" alignItems="flex-start" sx={{ mb: 2 }}>
+            <Box>
+              <Typography sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', mb: 0.5 }}>
+                반가워요
+              </Typography>
+              <Typography sx={{ color: '#FFFFFF', fontWeight: 800, fontSize: { xs: '1.6rem', md: '2rem' } }}>
+                {user?.nickname ?? '헬시'}님
+              </Typography>
+            </Box>
+            {streak > 0 && (
+              <Stack
+                direction="row"
+                spacing={0.5}
+                alignItems="center"
+                sx={{
+                  bgcolor: 'rgba(255,255,255,0.18)',
+                  backdropFilter: 'blur(6px)',
+                  borderRadius: 999,
+                  px: 1.5,
+                  py: 0.75,
+                  mt: 0.5,
+                }}
+              >
+                <LocalFireDepartmentRoundedIcon sx={{ color: '#FFD166', fontSize: 20 }} />
+                <Typography sx={{ color: '#FFFFFF', fontWeight: 800, fontSize: '0.85rem' }}>
+                  {streak}일 연속
+                </Typography>
+              </Stack>
+            )}
+          </Stack>
           <Card
             onClick={() => navigate('/chat')}
             sx={{

@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import PageHeader from '../components/common/page-header.jsx';
+import GradientHeader from '../components/common/gradient-header.jsx';
 import { supabase } from '../lib/supabase.js';
 import { getCurrentUserId } from '../lib/auth.js';
 
@@ -67,12 +67,24 @@ function SeedChat() {
 
   return (
     <Box sx={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', pb: 10 }}>
-      <Container maxWidth="sm" sx={{ pt: { xs: 2, md: 4 }, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-        <PageHeader title="시드와 대화하기" backTo="/" />
+      <GradientHeader title="시드와 대화하기" backTo="/" />
 
-        <Typography sx={{ color: 'text.disabled', fontSize: '0.75rem', mb: 2 }}>
-          * 프로토타입 단계라 시드는 미리 준비된 문장으로 답해요. 실제 AI 대화는 다음 개발 단계에서 추가될 예정이에요.
-        </Typography>
+      <Container maxWidth="sm" sx={{ mt: -2, pt: { xs: 0, md: 1 }, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+        <Box
+          sx={{
+            bgcolor: 'background.paper',
+            border: '1px solid',
+            borderColor: 'divider',
+            borderRadius: 3,
+            px: 2,
+            py: 1.25,
+            mb: 2,
+          }}
+        >
+          <Typography sx={{ color: 'text.disabled', fontSize: '0.75rem' }}>
+            * 프로토타입 단계라 시드는 미리 준비된 문장으로 답해요. 실제 AI 대화는 다음 개발 단계에서 추가될 예정이에요.
+          </Typography>
+        </Box>
 
         <Box sx={{ flexGrow: 1, overflowY: 'auto', mb: 2 }}>
           <Stack spacing={1.5}>
