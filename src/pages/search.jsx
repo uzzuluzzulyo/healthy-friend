@@ -38,24 +38,28 @@ function Search() {
       <GradientHeader title="내 기록 검색" subtitle="지난 심리 기록을 검색해보세요" backTo="/" />
 
       <Container maxWidth="sm" sx={{ mt: -3, pb: { xs: 3, md: 6 } }}>
-        <Box component="form" onSubmit={handleSearch} sx={{ mb: 3 }}>
-          <TextField
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="심리 기록 메모에서 검색"
-            fullWidth
-            size="small"
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchRoundedIcon fontSize="small" />
-                  </InputAdornment>
-                ),
-              },
-            }}
-          />
-        </Box>
+        <Card sx={{ borderRadius: 3, mb: 3 }}>
+          <CardContent sx={{ p: { xs: 2, md: 2.5 } }}>
+            <Box component="form" onSubmit={handleSearch}>
+              <TextField
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="심리 기록 메모에서 검색"
+                fullWidth
+                size="small"
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchRoundedIcon fontSize="small" />
+                      </InputAdornment>
+                    ),
+                  },
+                }}
+              />
+            </Box>
+          </CardContent>
+        </Card>
 
         {searched && results.length === 0 && (
           <Typography sx={{ color: 'text.secondary', textAlign: 'center' }}>
