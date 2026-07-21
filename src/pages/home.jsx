@@ -137,7 +137,7 @@ function Home() {
     <Box sx={{ width: '100%', pb: 10 }}>
       <Box
         sx={{
-          background: 'linear-gradient(135deg, #388DC6 0%, #2A6D9E 55%, #1CD9E8 140%)',
+          background: (theme) => theme.custom.heroGradient,
           pt: { xs: 7, md: 9 },
           pb: { xs: 5, md: 7 },
           px: 2,

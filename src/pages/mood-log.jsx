@@ -128,7 +128,7 @@ function MoodLog() {
                 <Box
                   sx={{
                     bgcolor: index === 0 ? 'primary.main' : 'background.default',
-                    background: index === 0 ? 'linear-gradient(135deg, #388DC6 0%, #1CD9E8 100%)' : undefined,
+                    background: index === 0 ? (theme) => theme.custom.heroGradient : undefined,
                     px: 2,
                     pt: 2,
                     pb: 1,

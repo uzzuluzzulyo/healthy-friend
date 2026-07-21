@@ -25,7 +25,7 @@ function GradientHeader({ title, subtitle, backTo, children }) {
   return (
     <Box
       sx={{
-        background: 'linear-gradient(135deg, #388DC6 0%, #2A6D9E 55%, #1CD9E8 140%)',
+        background: (theme) => theme.custom.heroGradient,
         pt: { xs: 6, md: 8 },
         pb: { xs: 4, md: 5 },
         px: 2,

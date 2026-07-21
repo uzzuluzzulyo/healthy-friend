@@ -47,15 +47,20 @@ const darkPalette = {
     contrastText: '#04333A',
   },
   background: {
-    default: '#0F1720',
-    paper: '#182430',
+    default: '#080D13',
+    paper: '#131C26',
   },
   text: {
     primary: '#EAF2F8',
-    secondary: '#93A5B8',
-    disabled: '#5C7080',
+    secondary: '#8B9DAF',
+    disabled: '#54677A',
   },
-  divider: 'rgba(255, 255, 255, 0.08)',
+  divider: 'rgba(255, 255, 255, 0.09)',
+};
+
+const heroGradient = {
+  light: 'linear-gradient(135deg, #388DC6 0%, #2A6D9E 55%, #1CD9E8 140%)',
+  dark: 'linear-gradient(135deg, #12293B 0%, #0B1A26 55%, #0A3A40 140%)',
 };
 
 export function createAppTheme(mode = 'light') {
@@ -63,6 +68,9 @@ export function createAppTheme(mode = 'light') {
 
   return createTheme({
     palette,
+    custom: {
+      heroGradient: mode === 'dark' ? heroGradient.dark : heroGradient.light,
+    },
     shape: {
       borderRadius: 4,
     },
