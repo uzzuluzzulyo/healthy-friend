@@ -35,17 +35,17 @@ const SONGS = [
 
 function RingStat({ icon, label, value, goal, unit, color }) {
   const pct = Math.min(100, Math.round((value / goal) * 100));
-  const size = 84;
-  const stroke = 8;
+  const size = 92;
+  const stroke = 7;
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
   const offset = c - (pct / 100) * c;
 
   return (
-    <Stack alignItems="center" spacing={1} sx={{ flex: 1 }}>
-      <Box sx={{ position: 'relative', width: size, height: size }}>
+    <Box sx={{ textAlign: 'center' }}>
+      <Box sx={{ position: 'relative', width: size, height: size, mx: 'auto' }}>
         <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
-          <circle cx={size / 2} cy={size / 2} r={r} stroke="rgba(26,39,51,0.08)" strokeWidth={stroke} fill="none" />
+          <circle cx={size / 2} cy={size / 2} r={r} stroke="rgba(26,39,51,0.07)" strokeWidth={stroke} fill="none" />
           <circle
             cx={size / 2}
             cy={size / 2}
@@ -62,7 +62,9 @@ function RingStat({ icon, label, value, goal, unit, color }) {
         <Box
           sx={{
             position: 'absolute',
-            inset: 0,
+            inset: 10,
+            borderRadius: '50%',
+            bgcolor: `${color}16`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -72,17 +74,15 @@ function RingStat({ icon, label, value, goal, unit, color }) {
           {icon}
         </Box>
       </Box>
-      <Box sx={{ textAlign: 'center' }}>
-        <Typography sx={{ fontWeight: 700, fontSize: '0.95rem', color: 'text.primary' }}>
-          {value.toLocaleString()}
-          <Typography component="span" sx={{ fontSize: '0.7rem', color: 'text.secondary' }}>
-            {' '}
-            / {goal.toLocaleString()}{unit}
-          </Typography>
+      <Typography sx={{ fontWeight: 800, fontSize: '1.05rem', color: 'text.primary', mt: 1.25 }}>
+        {value.toLocaleString()}
+        <Typography component="span" sx={{ fontSize: '0.7rem', fontWeight: 600, color: 'text.secondary' }}>
+          {' '}
+          / {goal.toLocaleString()}{unit}
         </Typography>
-        <Typography sx={{ fontSize: '0.75rem', color: 'text.secondary' }}>{label}</Typography>
-      </Box>
-    </Stack>
+      </Typography>
+      <Typography sx={{ fontSize: '0.75rem', color: 'text.secondary', mt: 0.25 }}>{label}</Typography>
+    </Box>
   );
 }
 
@@ -202,28 +202,32 @@ function Home() {
       <Container maxWidth="sm" sx={{ mt: -3, pb: { xs: 3, md: 6 } }}>
         <Card sx={{ borderRadius: 3, mb: 3, cursor: 'pointer' }} onClick={() => navigate('/health-hub')}>
           <CardContent sx={{ p: { xs: 2.5, md: 3.5 } }}>
-            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2.5 }}>
               <Typography sx={{ color: 'text.primary', fontWeight: 700 }}>나만의 건강 LOG</Typography>
               <ArrowForwardRoundedIcon sx={{ color: 'text.secondary', fontSize: 18 }} />
-            </Stack>
-            <Stack direction="row" spacing={2}>
-              <RingStat
-                icon={<DirectionsWalkRoundedIcon />}
-                label="걸음 수"
-                value={steps}
-                goal={STEP_GOAL}
-                unit="보"
-                color="#388DC6"
-              />
-              <RingStat
-                icon={<WaterDropRoundedIcon />}
-                label="물 섭취량"
-                value={waterMl}
-                goal={WATER_GOAL_ML}
-                unit="ml"
-                color="#1CD9E8"
-              />
-            </Stack>
+            </Box>
+            <Grid container>
+              <Grid size={6}>
+                <RingStat
+                  icon={<DirectionsWalkRoundedIcon />}
+                  label="걸음 수"
+                  value={steps}
+                  goal={STEP_GOAL}
+                  unit="보"
+                  color="#388DC6"
+                />
+              </Grid>
+              <Grid size={6} sx={{ borderLeft: '1px solid', borderColor: 'divider' }}>
+                <RingStat
+                  icon={<WaterDropRoundedIcon />}
+                  label="물 섭취량"
+                  value={waterMl}
+                  goal={WATER_GOAL_ML}
+                  unit="ml"
+                  color="#1CD9E8"
+                />
+              </Grid>
+            </Grid>
           </CardContent>
         </Card>
 
