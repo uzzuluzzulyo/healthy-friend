@@ -20,21 +20,33 @@ import { getCurrentUserId } from '../lib/auth.js';
 const STEP_GOAL = 10000;
 const WATER_GOAL_ML = 1500;
 
-const MOOD_SONGS = [
+const MOODS = [
   {
     tag: '힘들 때',
-    title: 'TOMORROW X TOGETHER - Trust Fund Baby',
-    videoId: '2demh7rlacU',
+    songs: [{ title: 'TOMORROW X TOGETHER - Trust Fund Baby', videoId: '2demh7rlacU' }],
   },
   {
     tag: '신날 때',
-    title: 'NCT WISH - Ode to Love',
-    videoId: '1o5O2YvV3HU',
+    songs: [
+      { title: 'NCT WISH - Ode to Love', videoId: '1o5O2YvV3HU' },
+      { title: 'NCT WISH - poppop', videoId: 'LNETckymbzk' },
+      { title: 'NCT WISH - Steady', videoId: 'IKlkZZv76Ho' },
+      { title: 'NCT WISH - COLOR', videoId: '28dAfmIAlCo' },
+      { title: 'NCT WISH - BUBBLE GUM', videoId: 'dhLzkb0tcN0' },
+    ],
   },
   {
     tag: '화날 때',
-    title: 'ENHYPEN - Future Perfect (Pass the MIC)',
-    videoId: 'QMlNLo74mOw',
+    songs: [{ title: 'ENHYPEN - Future Perfect (Pass the MIC)', videoId: 'QMlNLo74mOw' }],
+  },
+  {
+    tag: '위로되는 노래',
+    songs: [
+      { title: 'NCT WISH - Wishful Winter', videoId: 'NAhEwvI9TGE' },
+      { title: 'NCT WISH - SOMEDAY', videoId: 'M2PZUOQDNrc' },
+      { title: 'NCT WISH - Songbird', videoId: 'C_qALZPuK8I' },
+      { title: 'NCT WISH - Same Sky', videoId: 'Ud44639XwDI' },
+    ],
   },
 ];
 
@@ -42,8 +54,13 @@ function getTodaySongs() {
   const dayOfYear = Math.floor(
     (Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000
   );
-  const start = dayOfYear % MOOD_SONGS.length;
-  return [MOOD_SONGS[start], MOOD_SONGS[(start + 1) % MOOD_SONGS.length]];
+  const moodStart = dayOfYear % MOODS.length;
+  const todayMoods = [MOODS[moodStart], MOODS[(moodStart + 1) % MOODS.length]];
+
+  return todayMoods.map((mood) => {
+    const song = mood.songs[dayOfYear % mood.songs.length];
+    return { tag: mood.tag, title: song.title, videoId: song.videoId };
+  });
 }
 
 function RingStat({ icon, label, value, goal, unit, color }) {
