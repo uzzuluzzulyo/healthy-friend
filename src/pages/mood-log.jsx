@@ -30,7 +30,7 @@ const moods = [
 
 const testCards = [
   { title: '운명의 새싹테스트', subtitle: '나는 어떤 새싹으로 자랄까?' },
-  { title: '낭플갱어 테스트', subtitle: '나와 닮은 고양이는? (인기 퀴즈)' },
+  { title: '냥플갱어 테스트', subtitle: '나와 닮은 고양이는? (인기 퀴즈)' },
 ];
 
 const iconRow = [
@@ -124,7 +124,7 @@ function MoodLog() {
         <Grid container spacing={1.5} sx={{ mb: 2 }}>
           {testCards.map((test, index) => (
             <Grid key={test.title} size={6}>
-              <Card sx={{ borderRadius: 3, height: '100%', overflow: 'hidden' }}>
+              <Card sx={{ borderRadius: 3, height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                 <Box
                   sx={{
                     bgcolor: index === 0 ? 'primary.main' : 'background.default',
@@ -148,7 +148,7 @@ function MoodLog() {
                     {test.subtitle}
                   </Typography>
                 </Box>
-                <CardContent sx={{ pt: 1.5 }}>
+                <CardContent sx={{ pt: 1.5, mt: 'auto' }}>
                   <Button
                     size="small"
                     fullWidth
