@@ -20,18 +20,31 @@ import { getCurrentUserId } from '../lib/auth.js';
 const STEP_GOAL = 10000;
 const WATER_GOAL_ML = 1500;
 
-const SONGS = [
+const MOOD_SONGS = [
   {
-    tag: '#신나는',
-    title: 'NCT WISH - Boy Meets Girl',
-    videoId: '2derLGPaliE',
+    tag: '힘들 때',
+    title: 'TOMORROW X TOGETHER - Trust Fund Baby',
+    videoId: '2demh7rlacU',
   },
   {
-    tag: '#즐겨 듣는 노래',
-    title: 'NCT WISH - YO-I-DON!',
-    videoId: 'E1d8dVSs0Bg',
+    tag: '신날 때',
+    title: 'NCT WISH - Ode to Love',
+    videoId: '1o5O2YvV3HU',
+  },
+  {
+    tag: '화날 때',
+    title: 'ENHYPEN - Future Perfect (Pass the MIC)',
+    videoId: 'QMlNLo74mOw',
   },
 ];
+
+function getTodaySongs() {
+  const dayOfYear = Math.floor(
+    (Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000
+  );
+  const start = dayOfYear % MOOD_SONGS.length;
+  return [MOOD_SONGS[start], MOOD_SONGS[(start + 1) % MOOD_SONGS.length]];
+}
 
 function RingStat({ icon, label, value, goal, unit, color }) {
   const pct = Math.min(100, Math.round((value / goal) * 100));
@@ -105,6 +118,7 @@ function Home() {
   const { user } = useCurrentUser();
   const [todayLog, setTodayLog] = useState(null);
   const [streak, setStreak] = useState(0);
+  const [todaySongs] = useState(getTodaySongs);
 
   useEffect(() => {
     const userId = getCurrentUserId();
@@ -237,10 +251,10 @@ function Home() {
               오늘의 노래 추천
             </Typography>
             <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem', mb: 2.5 }}>
-              신나는 노래로 기분 전환은 어떠신가요?
+              오늘의 기분에 맞는 노래, 매일 바뀌어요
             </Typography>
             <Grid container spacing={2.5}>
-              {SONGS.map((song) => (
+              {todaySongs.map((song) => (
                 <Grid key={song.tag} size={6}>
                   <Box
                     component="a"
