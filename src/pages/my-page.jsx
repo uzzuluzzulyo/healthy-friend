@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -6,6 +7,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
 import Switch from '@mui/material/Switch';
 import Divider from '@mui/material/Divider';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
@@ -17,6 +19,30 @@ import GradientHeader from '../components/common/gradient-header.jsx';
 import { useCurrentUser } from '../hooks/use-current-user.js';
 import { useColorMode } from '../hooks/color-mode-context.jsx';
 import { logout } from '../lib/auth.js';
+import { supabase } from '../lib/supabase.js';
+import { getCurrentUserId } from '../lib/auth.js';
+
+const BADGES = [
+  { id: '3', days: 3, label: '첫 발걸음', emoji: '🌱' },
+  { id: '7', days: 7, label: '일주일 개근', emoji: '🔥' },
+  { id: '30', days: 30, label: '한 달 챔피언', emoji: '🏆' },
+  { id: '100', days: 100, label: '백일의 습관', emoji: '💎' },
+];
+
+function computeLongestStreak(logDates) {
+  const uniqueSorted = [...new Set(logDates)].sort();
+  let longest = 0;
+  let current = 0;
+  let prevDate = null;
+
+  for (const dateStr of uniqueSorted) {
+    const date = new Date(dateStr);
+    current = prevDate && Math.round((date - prevDate) / 86400000) === 1 ? current + 1 : 1;
+    longest = Math.max(longest, current);
+    prevDate = date;
+  }
+  return longest;
+}
 
 function SettingRow({ icon, label, action }) {
   return (
@@ -34,6 +60,18 @@ function MyPage() {
   const navigate = useNavigate();
   const { user, loading } = useCurrentUser();
   const { mode, toggleMode } = useColorMode();
+  const [longestStreak, setLongestStreak] = useState(0);
+
+  useEffect(() => {
+    const userId = getCurrentUserId();
+    if (!userId) return;
+
+    supabase
+      .from('hf_health_logs')
+      .select('log_date')
+      .eq('user_id', userId)
+      .then(({ data }) => setLongestStreak(computeLongestStreak((data ?? []).map((row) => row.log_date))));
+  }, []);
 
   function handleLogout() {
     logout();
@@ -72,6 +110,58 @@ function MyPage() {
       </GradientHeader>
 
       <Container maxWidth="sm" sx={{ mt: -2, pb: { xs: 3, md: 6 } }}>
+        <Card sx={{ borderRadius: 3, mb: 2 }}>
+          <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+            <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'baseline', mb: 1.5 }}>
+              <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', fontWeight: 700 }}>
+                달성 배지
+              </Typography>
+              <Typography sx={{ color: 'text.disabled', fontSize: '0.72rem' }}>
+                최장 연속 기록 {longestStreak}일
+              </Typography>
+            </Box>
+            <Grid container spacing={1.5}>
+              {BADGES.map((badge) => {
+                const unlocked = longestStreak >= badge.days;
+                return (
+                  <Grid key={badge.id} size={{ xs: 6, sm: 3 }}>
+                    <Box
+                      sx={{
+                        borderRadius: 2,
+                        textAlign: 'center',
+                        py: 2,
+                        border: '1px solid',
+                        borderColor: unlocked ? 'primary.main' : 'divider',
+                        bgcolor: unlocked ? 'primary.main' : 'background.default',
+                        opacity: unlocked ? 1 : 0.55,
+                      }}
+                    >
+                      <Typography sx={{ fontSize: '1.6rem', filter: unlocked ? 'none' : 'grayscale(1)' }}>
+                        {badge.emoji}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: '0.72rem',
+                          fontWeight: 700,
+                          mt: 0.5,
+                          color: unlocked ? '#FFFFFF' : 'text.secondary',
+                        }}
+                      >
+                        {badge.label}
+                      </Typography>
+                      <Typography
+                        sx={{ fontSize: '0.65rem', mt: 0.25, color: unlocked ? 'rgba(255,255,255,0.85)' : 'text.disabled' }}
+                      >
+                        {unlocked ? '달성!' : `${badge.days}일 연속 기록`}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </CardContent>
+        </Card>
+
         <Card sx={{ borderRadius: 3, mb: 2 }}>
           <CardContent sx={{ p: { xs: 2, md: 3 } }}>
             <Typography sx={{ color: 'text.secondary', fontSize: '0.75rem', fontWeight: 700, mb: 0.5 }}>
