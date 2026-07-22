@@ -150,6 +150,10 @@ function MoodLog() {
                 </Box>
                 <CardContent sx={{ pt: 1.5, mt: 'auto' }}>
                   <Button
+                    component="a"
+                    href="https://www.banggooso.com/ko"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     size="small"
                     fullWidth
                     variant="contained"
