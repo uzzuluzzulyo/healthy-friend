@@ -221,8 +221,7 @@ function Home() {
             sx={{
               borderRadius: 3,
               cursor: 'pointer',
-              bgcolor: 'rgba(255,255,255,0.22)',
-              border: '1px solid rgba(255,255,255,0.3)',
+              bgcolor: 'rgba(255,255,255,0.14)',
               boxShadow: 'none',
               backdropFilter: 'blur(6px)',
             }}

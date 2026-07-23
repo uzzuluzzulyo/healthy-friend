@@ -48,7 +48,7 @@ const darkPalette = {
   },
   background: {
     default: '#080D13',
-    paper: '#182531',
+    paper: '#131C26',
   },
   text: {
     primary: '#EAF2F8',
@@ -87,7 +87,6 @@ export function createAppTheme(mode = 'light') {
         styleOverrides: {
           root: {
             borderRadius: 12,
-            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.09)' : 'none',
             boxShadow: mode === 'dark' ? '0 2px 12px rgba(0, 0, 0, 0.32)' : '0 2px 12px rgba(26, 39, 51, 0.06)',
           },
         },
