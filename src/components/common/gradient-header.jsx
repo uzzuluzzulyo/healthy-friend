@@ -25,12 +25,23 @@ function GradientHeader({ title, subtitle, backTo, children }) {
   return (
     <Box
       sx={{
+        position: 'relative',
+        overflow: 'hidden',
         background: (theme) => theme.custom.heroGradient,
         pt: { xs: 6, md: 8 },
         pb: { xs: 4, md: 5 },
         px: 2,
       }}
     >
+      <Box
+        aria-hidden
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(ellipse 60% 55% at 15% -10%, rgba(255,255,255,0.16), transparent 60%)',
+          pointerEvents: 'none',
+        }}
+      />
       <Container maxWidth="sm" sx={{ position: 'relative' }}>
         <IconButton
           onClick={() => (backTo ? navigate(backTo) : navigate(-1))}
