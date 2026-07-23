@@ -168,24 +168,13 @@ function Home() {
     <Box sx={{ width: '100%', pb: 10 }}>
       <Box
         sx={{
-          position: 'relative',
-          overflow: 'hidden',
           background: (theme) => theme.custom.heroGradient,
           pt: { xs: 7, md: 9 },
           pb: { xs: 5, md: 7 },
           px: 2,
         }}
       >
-        <Box
-          aria-hidden
-          sx={{
-            position: 'absolute',
-            inset: 0,
-            background: 'radial-gradient(ellipse 60% 55% at 15% -10%, rgba(255,255,255,0.16), transparent 60%)',
-            pointerEvents: 'none',
-          }}
-        />
-        <Container maxWidth="sm" sx={{ position: 'relative' }}>
+        <Container maxWidth="sm">
           <Stack direction="row" justifyContent="space-between" alignItems="flex-start" sx={{ mb: 2 }}>
             <Box>
               <Typography sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', mb: 0.5 }}>
